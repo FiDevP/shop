@@ -8,6 +8,25 @@ from .models import *
 from PIL import Image
 
 
+class SmartphoneAdminForm(ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        instance = kwargs.get('instance')
+        # если чекбокс у sd не выбран, значит поле сд_волюм_макс только для чтения и светлосерый фон
+        if instance and not instance.sd:
+            self.fields['sd_volume_max'].widget.attrs.update({
+                'readonly': True, 'style': 'background: lightgray'
+            })
+
+    def clean(self):
+        """Метод для работы с полями"""
+
+        if not self.cleaned_data['sd']:
+            self.cleaned_data['sd_volume_max'] = None
+        return self.cleaned_data
+
+
 class NotebookAdminForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
@@ -46,6 +65,9 @@ class NotebookAdmin(admin.ModelAdmin):
 
 
 class SmartphoneAdmin(admin.ModelAdmin):
+
+    change_form_template = 'admin.html'
+    form = SmartphoneAdminForm
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         # При добавление смартфона в категориях выводим только категорию смартфоны
