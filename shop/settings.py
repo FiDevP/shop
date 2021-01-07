@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # 'mainapp.apps.IshopConfig',
     'mainapp',
+    'crispy_forms',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +132,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # STATICFILES_DIRS = (
 #     os.path.join(BASE_DIR, 'static_dev')
 # )
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
