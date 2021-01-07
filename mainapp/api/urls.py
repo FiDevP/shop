@@ -1,7 +1,7 @@
 from django.urls import path
 
 from .api_views import (
-    CategoryListAPIView,
+    CategoryAPIView,
     SmartphoneListAPIView,
     NotebookListAPIView,
     NotebookDetailAPIView,
@@ -9,7 +9,7 @@ from .api_views import (
 
 
 urlpatterns = [
-    path('categories/', CategoryListAPIView.as_view(), name='categories_list'),
+    path('categories/<str:id>/', CategoryAPIView.as_view(), name='categories_list'),
     path('smartphones/', SmartphoneListAPIView.as_view(), name='smartphones_list'),
     path('customers/', CustomerListAPIView.as_view(), name='customers_list'),
     path('notebooks/', NotebookListAPIView.as_view(), name='notebook_list'),
