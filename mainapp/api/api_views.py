@@ -1,8 +1,8 @@
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, RetrieveAPIView
 from rest_framework.filters import SearchFilter
 
-from .serializers import CategorySerializer, SmartphoneSerializer, NotebookSerializer
-from ..models import Category, Smartphone, Notebook
+from .serializers import CategorySerializer, SmartphoneSerializer, NotebookSerializer, CustomerSerializer
+from ..models import Category, Smartphone, Notebook, Customer
 
 
 class CategoryListAPIView(ListAPIView):
@@ -23,3 +23,17 @@ class NotebookListAPIView(ListAPIView):
 
     serializer_class = NotebookSerializer
     queryset = Notebook.objects.all()
+
+
+class NotebookDetailAPIView(RetrieveAPIView):
+
+    serializer_class = NotebookSerializer
+    queryset = Notebook.objects.all()
+    lookup_field = 'id'
+
+
+class CustomerListAPIView(ListAPIView):
+
+    serializer_class = CustomerSerializer
+    queryset = Customer.objects.all()
+

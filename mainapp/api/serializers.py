@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from ..models import Category, Smartphone, Notebook
+from ..models import Category, Smartphone, Notebook, Customer, Orders
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -55,3 +55,18 @@ class NotebookSerializer(BaseProductSerializer, serializers.ModelSerializer):
     class Meta:
         model = Notebook
         fields = '__all__'
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Orders
+        fields = '__all__'
+
+
+class CustomerSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Customer
+        fields = '__all__'
+
+    orders = OrderSerializer(many=True)
